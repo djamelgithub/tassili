@@ -48,13 +48,12 @@ io.on('connection', socket => {
     SocketServer(socket)
 })
 
-// Create peer server
+ 
 ExpressPeerServer(http, { path: '/' })
  
 
-app.use('/api', require('./routes/postvistasRouter'))
- app.use('/api', require('./routes/languageRouter'))
-
+ 
+app.use('/api', require('./routes/languageRouter'))
 app.use('/api', require('./routes/authRouter'))
 app.use('/api', require('./routes/userRouter'))
 app.use('/api', require('./routes/postRouter'))
