@@ -36,12 +36,8 @@ i18next
 
 const app = express()
 app.use(express.json())
-const corsOptions = {
-  origin: 'https://render-app-djamel22222.onrender.com'  ,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Habilita el intercambio de cookies (si es necesario)
-  optionsSuccessStatus: 204, // Establece el código de respuesta para las solicitudes preflight OPTIONS
-};
+app.use(cors())
+
 app.use(cookieParser())
 
 
