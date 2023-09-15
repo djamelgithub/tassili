@@ -56,7 +56,7 @@ const postCtrl = {
             await newPost.save();
 
             res.json({
-                msg: "Votre publication a été créée et envoyée aux administrateurs en vue d'une validation postérieure.",
+                msg: "Votre publication a été envoyé aux administrateurs pour la validation.",
                 newPost: {
                     ...newPost._doc,
                     user: req.user
@@ -84,7 +84,7 @@ const postCtrl = {
 
             const posts = await features.query
                 .sort('-createdAt')
-                .populate("user likes", "avatar username fullname followers")
+                .populate("user likes", "avatar username   followers")
                 .populate({
                     path: "comments",
                     populate: {
@@ -185,7 +185,7 @@ const postCtrl = {
 
             const posts = await features.query
                 .sort('-createdAt')
-                .populate("user likes", "avatar username fullname followers")
+                .populate("user likes", "avatar username   followers")
                 .populate({
                     path: "comments",
                     populate: {
@@ -193,9 +193,9 @@ const postCtrl = {
                         select: "-password"
                     }
                 });
-
+               
             res.json({
-                msg: 'Success!',
+                msg: "Votre publication a été publiée avec succès.",
                 result: posts.length,
                 posts
             });
@@ -226,7 +226,7 @@ const postCtrl = {
                     images
                 }
             )
-                .populate("user likes", "avatar username fullname")
+                .populate("user likes", "avatar username  ")
                 .populate({
                     path: "comments",
                     populate: {
@@ -301,7 +301,7 @@ const postCtrl = {
     getPost: async (req, res) => {
         try {
             const post = await Posts.findById(req.params.id)
-                .populate("user likes", "avatar username fullname followers")
+                .populate("user likes", "avatar username   followers")
                 .populate({
                     path: "comments",
                     populate: {

@@ -5,7 +5,7 @@ const i18next = require('i18next');
 const authCtrl = {
     register: async (req, res) => {
         try {
-            const { fullname, username, email, password  } = req.body
+            const {   username, email, password  } = req.body
             let newUserName = username.toLowerCase().replace(/ /g, '')
 
             const user_name = await Users.findOne({username: newUserName})
@@ -20,7 +20,7 @@ const authCtrl = {
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = new Users({
-                fullname, username: newUserName, email, password: passwordHash 
+     username: newUserName, email, password: passwordHash 
             })
 
 
@@ -52,7 +52,7 @@ const authCtrl = {
             const { email, password } = req.body
 
             const user = await Users.findOne({email})
-            .populate("followers following usariosmehanbloqueado usariosbloqueadospormi", "avatar username fullname  usariosmehanbloqueado  usariosbloqueadospormi followers following")
+            .populate("followers following usariosmehanbloqueado usariosbloqueadospormi", "avatar username    usariosmehanbloqueado  usariosbloqueadospormi followers following")
 
             if(!user) return res.status(400).json({
                 msg:
@@ -101,7 +101,7 @@ const authCtrl = {
                 if(err) return res.status(400).json({msg: i18next.t('Please login now.')})
 
                 const user = await Users.findById(result.id).select("-password")
-                .populate('followers following usariosmehanbloqueado usariosbloqueadospormi ', 'avatar username fullname usariosmehanbloqueado usariosbloqueadospormi followers following')
+                .populate('followers following usariosmehanbloqueado usariosbloqueadospormi ', 'avatar username   usariosmehanbloqueado usariosbloqueadospormi followers following')
 
                 if(!user) return res.status(400).json({msg: i18next.t('This does not exist.')}) 
 

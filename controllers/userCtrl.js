@@ -24,7 +24,7 @@ const userCtrl = {
               const features = new APIfeatures(Users.find({}), req.query).paginating();
           
               const users = await features.query.sort('-createdAt')
-                .populate("posts post likes", " likes comments  avatar username fullname role followers")
+                .populate("posts post likes", " likes comments  avatar username   role followers")
                 .populate({
                   path: "posts",
                   populate: {
@@ -64,11 +64,11 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const { avatar, fullname, mobile, address, story, website } = req.body
-            if(!fullname) return res.status(400).json({msg: "Please add your full name."})
+            const { avatar, username, mobile, address, story, website } = req.body
+            if(!username) return res.status(400).json({msg: "Please add your user name."})
 
             await Users.findOneAndUpdate({_id: req.user._id}, {
-                avatar, fullname, mobile, address, story, website,  
+                avatar, username, mobile, address, story, website,  
             })
 
             res.json({msg: "Update Success!"})

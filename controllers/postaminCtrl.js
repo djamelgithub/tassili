@@ -49,7 +49,7 @@ const postadminCtrl = {
             }), req.query).paginating()
 
             const posts = await features.query.sort('-createdAt')
-            .populate("user likes", "avatar username fullname followers")
+            .populate("user likes", "avatar username   followers")
             .populate({
                 path: "",
                 populate: {
@@ -74,7 +74,7 @@ const postadminCtrl = {
 
             const post = await Posts.findOneAndUpdate({_id: req.params.id}, {
                 content, images
-            }).populate("user likes", "avatar username fullname")
+            }).populate("user likes", "avatar username  ")
             .populate({
                 path: " ",
                 populate: {
@@ -144,7 +144,7 @@ const postadminCtrl = {
     getPostadmin: async (req, res) => {
         try {
             const post  = await Posts.findById(req.params.id)
-            .populate("user likes", "avatar username fullname followers")
+            .populate("user likes", "avatar username   followers")
             .populate({
                 path: " ",
                 populate: {
